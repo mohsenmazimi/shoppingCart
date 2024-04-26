@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://file.myfontastic.com/HEae7VdTNz7UWvbe3kiwJb/icons.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/styles/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="shop_box_parent">
+      <span onclick="bascketShow()" class="icon-shopping-cart"></span>
+      <div id="bascket" class="bascket_item"></div>
+      <div class="shop_box">
+        <!-- start right -->
+        <div class="right">
+          <h1>
+            گوشی موبایل سامسونگ مدل Galaxy A13 SM-A137 ظرفیت 64 گیگابایت رم 4
+            گیگابایت - ویتنام
+          </h1>
+          <span> Samsung Galaxy A13 (SM-A137) 64/4 Vietnam Big Box </span>
+          <figure>
+            <img src="assets/images/black.png" />
+          </figure>
+        </div>
+        <!-- end right -->
+        <!-- start left -->
+        <div class="left">
+          <div class="colors">
+            <span>رنگ ها :</span>
+            <span class="color_box" onclick="colorChange(this)"
+              ><span class="color" data-color="black"></span
+              ><span>مشکی</span></span
+            >
+            <span class="color_box" onclick="colorChange(this)"
+              ><span class="color" data-color="white"></span
+              ><span>سفید</span></span
+            >
+            <span class="color_box" onclick="colorChange(this)"
+              ><span class="color" data-color="blue"></span
+              ><span>آبی</span></span
+            >
+            <span class="color_box" onclick="colorChange(this)"
+              ><span class="color" data-color="skyBlue"></span>
+              <span>آبی آسمانی</span></span
+            >
+          </div>
+          <div class="price">
+            <span
+              ><span class="priceAll">6,759,000</span> <span>تومان</span></span
+            >
+          </div>
+          <a href="#" onclick="addTocart()">افزودن به سبد خرید +</a>
+        </div>
+        <!-- end left -->
+      </div>
+    </div>
+
+    <script>
+      let colors = {
+        black: {
+          price: "69,560,398",
+          src: "assets/images/black.png",
+        },
+        white: {
+          price: "65,330,983",
+          src: "assets/images/white.png",
+        },
+        blue: {
+          price: "66,278,653",
+          src: "assets/images/blue.png",
+        },
+        skyBlue: {
+          price: "68,783,323",
+          src: "assets/images/skyBlue.png",
+        },
+      };
+      let priceAll = document.querySelector(".priceAll");
+      let img = document.querySelector("img");
+
+      function colorChange(select) {
+        select.children[1].classList.add("dBlock");
+        // colors["blue"].price
+        // getAttribiute
+        let selectedElement = select.children[0];
+        let selectedAttr = selectedElement.getAttribute("data-color");
+        priceAll.setAttribute("data-colorSelected", selectedAttr);
+        priceAll.setAttribute("data-imgSrcSelected", colors[selectedAttr].src);
+        priceAll.innerText = colors[selectedAttr].price;
+        img.setAttribute("src", colors[selectedAttr].src);
+      }
+      let rightBoxShop = document.querySelectorAll(".right");
+      let bascketItem = document.querySelector(".bascket_item");
+
+      function addTocart() {
+        let src = priceAll.getAttribute("data-imgSrcSelected");
+        let color = priceAll.getAttribute("data-colorSelected");
+        bascketItem.classList.remove("bascket_show");
+
+        console.log(src);
+        let price = priceAll.innerText;
+        bascketItem.innerHTML = `
+        <img class="img " src="${
+          src == null ? "assets/images/black.png" : src
+        }" />
+        <span class="bascket_color">${color == null ? "black" : color}</span>
+        <span class="price">${color == null ? "69,560,398" : price}</span>
+        `;
+        let bascketColor = document.querySelector(".bascket_color");
+        bascketColor.style.color = color == "white" ? "black" : "white";
+        bascketColor.style.backgroundColor = color !== null ? color : "black";
+      }
+      document.addEventListener("DOMContentLoaded", () => {
+        bascketItem.classList.add("bascket_show");
+      });
+      function bascketShow() {
+        bascketItem.classList.toggle("bascket_show");
+      }
+    </script>
+  </body>
+</html>
